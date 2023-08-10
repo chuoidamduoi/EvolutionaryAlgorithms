@@ -35,10 +35,10 @@ function onSubmitBT1() {
     var n_gen = document.getElementById('DB').value;
 
 
-    if (n_pop < 1) {
+    if (parseFloat(n_pop) < 1) {
         document.getElementById("msg-error1").innerHTML = 'Cá thể ban đầu phải > 0';
     }
-    else if (n_gen < n_pop) {
+    else if (parseFloat(n_gen) < parseFloat(n_pop)) {
         document.getElementById("msg-error1").innerHTML = 'Số lượng cá thể mới phải > Cá thể ban đầu';
     } else {
         document.getElementById("msg-error1").innerHTML = ''
