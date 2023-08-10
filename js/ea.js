@@ -52,24 +52,28 @@ function checkValidate() {
     var countItem = document.getElementById('countItem').value;
     var beginN = document.getElementById('beginN').value;
     var newN = document.getElementById('newN').value;
+    var maxValue = document.getElementById('maxValue').value;
 
-    if (countItem > 20) {
+    if (parseFloat(countItem) > 20) {
         document.getElementById("msg-error").innerHTML = 'Số lượng đồ vật không được > 20';
         rs = false
+    } else if (parseFloat(maxValue) < parseFloat(countItem)) {
+        document.getElementById("msg-error").innerHTML = 'Giá trị cao nhất phải > Số lượng đồ vật';
+        rs = false
     }
-    else if (knapsackValue < 1) {
+    else if (parseFloat(knapsackValue) < 1) {
         document.getElementById("msg-error").innerHTML = 'Sức chứa của túi phải > 0';
         rs = false
     }
-    else if (beginN < 1) {
+    else if (parseFloat(beginN) < 1) {
         document.getElementById("msg-error").innerHTML = 'Cá thể ban đầu phải > 0';
         rs = false
     }
-    else if (beginN > Math.pow(2, countItem)) {
+    else if (parseFloat(beginN) > Math.pow(2, countItem)) {
         document.getElementById("msg-error").innerHTML = 'Cá thể ban đầu không hợp lệ';
         rs = false
     }
-    else if (newN < beginN) {
+    else if (parseFloat(newN) < parseFloat(beginN)) {
         document.getElementById("msg-error").innerHTML = 'Số lượng cá thể mới phải > Cá thể ban đầu';
         rs = false
     }
@@ -92,11 +96,22 @@ function onSubmitBT2() {
         let strHTML = ''
         let value = 0
         let arrWeight = []
-        for (let i = 0; i < countItem; i++) {
+        // for (let i = 0; i < countItem; i++) {
+        //     value = Math.floor(Math.random() * (maxValue - 1 + 1)) + 1
+        //     strHTML += "  <div class='item'><p>" + value + "</p></div> "
+        //     arrWeight.push(value)
+        // }
+        // console.log("arrWeight.length !== countItem", arrWeight.length, countItem);
+        let i = 0
+        while (i < countItem) {
             value = Math.floor(Math.random() * (maxValue - 1 + 1)) + 1
-            strHTML += "  <div class='item'><p>" + value + "</p></div> "
-            arrWeight.push(value)
+            if (!arrWeight.includes(value)) {
+                strHTML += "  <div class='item'><p>" + value + "</p></div> "
+                arrWeight.push(value)
+                i++
+            }
         }
+
         // console.log("arrItem", arrItem);
         document.getElementById("list-item").innerHTML = strHTML;
         onSubmitKnapsack(beginN, knapsackValue, arrWeight, newN)
