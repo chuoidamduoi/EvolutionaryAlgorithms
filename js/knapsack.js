@@ -87,6 +87,8 @@ function onSubmitKnapsack(N, knapsackValue, arrWeight, n_gen) {
         }
     }
 
+    console.log("khởi tạo quần thể & đánh giá từng cá thể", parents)
+
     //sắp xếp theo thứ tự giảm dần của điểm thích nghi
     parents.sort((a, b) => b[1] - a[1]);
     // console.log("parents", parents);
@@ -98,7 +100,7 @@ function onSubmitKnapsack(N, knapsackValue, arrWeight, n_gen) {
     let score2 = 0
     let gen = 0
     let num = 0
-    // console.log("bests", bests);
+
     while (newparents.length < n_gen && pop > 0) {
         for (let i = 0; i < pop; i++) {
             if (i < pop - 1) {
@@ -157,6 +159,8 @@ function onSubmitKnapsack(N, knapsackValue, arrWeight, n_gen) {
         pop = newparents.length - 1
         best_parents = newparents
     }
+    console.log("các con cá thể mới:", newparents);
+
     if (bests) {
         let strHTML = "<h2> Danh sách các vật có thể bỏ vào túi là:</h2> <div class='list-item'>"
         for (let index in bests[0]) {

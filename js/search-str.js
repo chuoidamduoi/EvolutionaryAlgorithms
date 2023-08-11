@@ -89,7 +89,7 @@ function onSubmitSearch(target, n_pop, n_gen) {
         // //Print the progress
         console.log(`Generation ${gen}, Best score ${best_score}, Best string ${best_string}`);
     }
-
+    console.log("các con cá thể mới:", mutants);
     document.getElementById("result1").innerHTML = "<h2>Chuỗi được tìm thấy là: "+best_string+" , gen thứ: "+num+" </h2>";
 
 }
